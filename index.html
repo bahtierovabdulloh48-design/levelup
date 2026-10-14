@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LevelUP — Индивидуальный английский в Узбекистане</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FAF6EF;
+      --ink: #16161D;
+      --lime: #C8F04B;
+      --violet: #7B5CFF;
+      --coral: #FF6B4A;
+      --yellow: #FFD84D;
+      --card: #FFFFFF;
+      --muted: #6B6B76;
+      --border: rgba(22, 22, 29, 0.12);
+      --shadow: 0 20px 50px -15px rgba(22, 22, 29, 0.12);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Manrope', sans-serif;
+      overflow-x: hidden;
+    }
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 5vw; background: rgba(250, 246, 239, 0.9);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 22px;
+      text-decoration: none; color: var(--ink); display: flex; align-items: center; gap: 6px;
+    }
+    .logo span { color: var(--violet); }
+    nav { display: flex; gap: 24px; }
+    nav a { text-decoration: none; color: var(--muted); font-weight: 700; font-size: 15px; transition: 0.2s; }
+    nav a:hover { color: var(--ink); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
+      border-radius: 99px; font-weight: 800; font-size: 15px; text-decoration: none;
+      transition: all 0.25s ease; border: none; cursor: pointer;
+    }
+    .btn-dark { background: var(--ink); color: #fff; }
+    .btn-dark:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .btn-lime { background: var(--lime); color: var(--ink); }
+    .btn-lime:hover { transform: translateY(-3px); background: #b8e635; }
+    
+    .hero {
+      min-height: 100vh; padding: 140px 5vw 80px;
+      display: flex; flex-direction: column; justify-content: center; position: relative;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px; background: #fff;
+      padding: 8px 16px; border-radius: 99px; border: 1px solid var(--border);
+      font-size: 13px; font-weight: 800; color: var(--muted); margin-bottom: 24px; width: fit-content;
+    }
+    .badge .dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; }
+    h1 {
+      font-family: 'Unbounded', sans-serif; font-weight: 900;
+      font-size: clamp(32px, 6vw, 76px); line-height: 1.05; max-width: 900px;
+    }
+    h1 span { color: var(--violet); }
+    .hero-sub { margin: 24px 0 36px; max-width: 560px; font-size: 18px; color: var(--muted); line-height: 1.6; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    section { padding: 80px 5vw; }
+    .sec-tag {
+      display: inline-block; background: var(--lime); padding: 6px 14px;
+      border-radius: 99px; font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 16px;
+    }
+    h2 { font-family: 'Unbounded', sans-serif; font-size: clamp(26px, 4vw, 44px); margin-bottom: 16px; }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 24px;
+      padding: 32px; transition: 0.3s;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .card .icon { font-size: 32px; margin-bottom: 16px; }
+    .card h3 { font-family: 'Unbounded', sans-serif; font-size: 18px; margin-bottom: 10px; }
+    .card p { color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+    /* Тарифы */
+    #pricing { background: var(--ink); color: #fff; border-radius: 40px; margin: 0 2vw; }
+    #pricing h2 { color: #fff; }
+    .price-card {
+      background: #20202a; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 28px; padding: 36px; display: flex; flex-direction: column; position: relative;
+    }
+    .price-card.hot { border-color: var(--lime); background: #23251d; }
+    .price-card .hot-badge {
+      position: absolute; top: 20px; right: 20px; background: var(--lime);
+      color: var(--ink); font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 99px;
+    }
+    .price-card h3 { font-family: 'Unbounded', sans-serif; font-size: 22px; margin-bottom: 8px; }
+    .price-card .price { font-family: 'Unbounded', sans-serif; font-size: 36px; color: var(--lime); margin: 16px 0 8px; }
+    .price-card .sub-price { color: #888; font-size: 14px; margin-bottom: 24px; }
+    .price-card ul { list-style: none; margin-bottom: 32px; }
+    .price-card li { margin-bottom: 12px; font-size: 15px; color: #ccc; display: flex; gap: 8px; }
+    .price-card li::before { content: "✓"; color: var(--lime); font-weight: 800; }
+
+    .cta {
+      background: var(--violet); color: #fff; border-radius: 36px;
+      text-align: center; padding: 80px 4vw; margin-top: 60px;
+    }
+    .cta h2 { color: #fff; margin-bottom: 16px; }
+    .cta p { max-width: 500px; margin: 0 auto 32px; color: #dcd6ff; font-size: 17px; }
+
+    footer { padding: 40px 5vw; text-align: center; color: var(--muted); font-size: 14px; }
+
+    @media(max-width: 768px) { nav { display: none; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="#" class="logo">Level<span>UP</span></a>
+    <nav>
+      <a href="#about">Преимущества</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#contact">Запись</a>
+    </nav>
+    <a href="https://t.me/+LklhIVKvaytmNzUy" target="_blank" class="btn btn-dark">Записаться</a>
+  </header>
+
+  <section class="hero">
+    <div class="badge"><span class="dot"></span> Набор открыт · Первое занятие бесплатно</div>
+    <h1>Английский язык <span>индивидуально</span> под твою цель</h1>
+    <p class="hero-sub">Онлайн-уроки один на один с преподавателем. Без скучной зазубренности — только разговорная практика и гарантированный результат.</p>
+    <div class="hero-btns">
+      <a href="#pricing" class="btn btn-lime">💰 Смотреть тарифы</a>
+      <a href="https://t.me/+LklhIVKvaytmNzUy" target="_blank" class="btn btn-dark">✈️ Написать в Telegram</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <span class="sec-tag">Почему мы</span>
+    <h2>Обучение с фокусом на результат</h2>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">🎯</div>
+        <h3>Личная программа</h3>
+        <p>Составляем план под твой уровень: от разговорного A1 до сдачи IELTS на высокое число баллов.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🗣️</div>
+        <h3>70% практики</h3>
+        <p>Ты начинаешь говорить на английском прямо с первого занятия, преодолевая языковой барьер.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⏰</div>
+        <h3>Гибкое расписание</h3>
+        <p>Уроки проходят в удобное для тебя время онлайн. Занимайся из любой точки Узбекистана.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <span class="sec-tag" style="background: var(--yellow);">Стоимость</span>
+    <h2>Доступные индивидуальные тарифы</h2>
+    <div class="grid-3">
+      
+      <div class="price-card">
+        <h3>Старт</h3>
+        <div class="price">200 000 сум</div>
+        <div class="sub-price">в месяц / 8 занятий</div>
+        <ul>
+          <li>2 урока в неделю</li>
+          <li>Индивидуальный формат</li>
+          <li>Поддержка в чате 24/7</li>
+          <li>Базовые материалы</li>
+        </ul>
+        <a href="https://t.me/+LklhIVKvaytmNzUy" target="_blank" class="btn btn-lime">Выбрать Старт</a>
+      </div>
+
+      <div class="price-card hot">
+        <div class="hot-badge">ХИТ ПРОДАЖ 🔥</div>
+        <h3>Уверенный</h3>
+        <div class="price" style="color: var(--yellow);">350 000 сум</div>
+        <div class="sub-price">в месяц / 12 занятий</div>
+        <ul>
+          <li>3 урока в неделю</li>
+          <li>Разговорный клуб в подарок</li>
+          <li>Проверка всех домашних заданий</li>
+          <li>Приоритет в расписании</li>
+        </ul>
+        <a href="https://t.me/+LklhIVKvaytmNzUy" target="_blank" class="btn btn-lime">Выбрать Уверенный</a>
+      </div>
+
+      <div class="price-card">
+        <h3>Интенсив</h3>
+        <div class="price">500 000 сум</div>
+        <div class="sub-price">в месяц / 20 занятий</div>
+        <ul>
+          <li>5 уроков в неделю</li>
+          <li>Подготовка к IELTS / Собеседованию</li>
+          <li>Персональный куратор</li>
+          <li>Сертификат об окончании</li>
+        </ul>
+        <a href="https://t.me/+LklhIVKvaytmNzUy" target="_blank" class="btn btn-lime">Выбрать Интенсив</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="cta">
+      <h2>Начни говорить на английском уже сегодня!</h2>
+      <p>Запишись на бесплатный пробный урок в Telegram. Выясним твой уровень и составим план обучения.</p>
+      <a href="https://t.me/+LklhIVKvaytmNzUy" target="_blank" class="btn btn-lime" style="font-size: 17px; padding: 16px 36px;">🚀 Написать в Telegram</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© LevelUP English School. Все права защищены.</p>
+  </footer>
+
+</body>
+</html>
